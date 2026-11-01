@@ -82,7 +82,7 @@ a{color:#8ab4f8}
 <div class="grid" id="grid"></div>
 <h2>🕘 Riwayat tugas bot (terbaru dulu)</h2>
 <div id="hist"></div>
-<p class="foot">Sumber data: <a href="https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json">state.json di GitHub</a> (disalin dari dashboard live Vercel tiap 5 menit). Foto hasil terakhir diunggah bot saat tugas bergambar selesai; link foto kedaluwarsa sekitar 2 hari, jadi foto lama kembali jadi nama berkas saja. Foto dan video lengkap tetap dikirim bot langsung ke chat Telegram. Halaman ini refresh otomatis tiap 5 detik; timer "berjalan … detik" dihitung live di browser dari waktu mulai tugas. Data tugasnya sendiri diperbarui tiap 5 menit.</p>
+<p class="foot">Sumber data: <a href="https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json">state.json di GitHub</a> (disalin dari dashboard live Vercel tiap 5 menit). Foto hasil terakhir diunggah bot saat tugas bergambar selesai; link foto kedaluwarsa sekitar 2 hari, jadi foto lama kembali jadi nama berkas saja. Foto dan video lengkap tetap dikirim bot langsung ke chat Telegram. Halaman ini refresh otomatis tiap 5 detik; timer "berjalan … detik" dihitung live di browser dari waktu mulai tugas. Data tugasnya sendiri diperbarui tiap 5 menit. Versi halaman: v2-media (thumbnail ringan + media tidak dibangun ulang tiap refresh).</p>
 </div>
 <script>
 const AVATAR_SVG={
@@ -106,6 +106,19 @@ function fmtElapsed(ts){
   return Math.floor(d/3600)+' jam '+Math.floor((d%3600)/60)+' menit';
 }
 const cardEls={}, cardMedia={}, cardWorking={}; let lastHist='';
+const mediaData={}, mediaFetch={};
+function fileName(u){ try{ return decodeURIComponent(u.split('?')[0].split('/').pop()); }catch(e){ return ''; } }
+function applyThumb(b){
+  const card=cardEls[b]; if(!card) return; const md=mediaData[b]; if(!md) return;
+  const img=card.querySelector('.media img'); const vid=card.querySelector('.media video');
+  if(img && md.photo_file && md.photo_thumb && fileName(img.getAttribute('src')||'')===md.photo_file && img.getAttribute('src')!==md.photo_thumb){ img.setAttribute('src', md.photo_thumb); }
+  if(vid && md.video_file && md.video_poster && fileName(vid.getAttribute('src')||'')===md.video_file && vid.getAttribute('poster')!==md.video_poster){ vid.setAttribute('poster', md.video_poster); }
+}
+function fetchThumb(b, key){
+  if(mediaFetch[b]===key) return; mediaFetch[b]=key;
+  const slug=b.toLowerCase();
+  fetch('https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/media/'+slug+'.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{ mediaData[b]=j; applyThumb(b); }).catch(()=>{});
+}
 function render(){
   const d=lastData; if(!d) return;
   const badge=document.getElementById('livebadge');
@@ -137,10 +150,11 @@ function render(){
     // PENTING: elemen media JANGAN dibangun ulang tiap refresh. Dulu grid.innerHTML='' tiap 5 detik menghancurkan <img>/<video> yang sedang diunduh, lalu membuatnya lagi dari nol — di data lambat, foto 1,3 MB & video 3,5 MB tidak pernah sempat selesai sehingga selalu tampil rusak / 0:00. Sekarang media hanya diganti kalau URL-nya benar-benar berubah.
     const mediaKey=preview+'|'+video;
     if(cardMedia[b]!==mediaKey){
-      const mediaHtml=(video?'<div class="photo"><label>🎬 Video hasil terakhir</label><video src="'+video+'" controls preload="metadata" referrerpolicy="no-referrer" style="width:100%;border-radius:12px;border:1px solid var(--line);background:#0b0e14"></video></div>':'')+(preview?'<div class="photo"><label>📸 Foto hasil terakhir</label><img src="'+preview+'" loading="eager" referrerpolicy="no-referrer" alt="Foto hasil terakhir '+b+'"></div>':'');
+      const mediaHtml=(video?'<div class="photo"><label>🎬 Video hasil terakhir</label><video src="'+video+'" controls preload="metadata" referrerpolicy="no-referrer" style="width:100%;border-radius:12px;border:1px solid var(--line);background:#0b0e14"></video><div><a href="'+video+'" target="_blank" rel="noopener">Buka video asli di tab baru</a></div></div>':'')+(preview?'<div class="photo"><label>📸 Foto hasil terakhir</label><img src="'+preview+'" loading="eager" referrerpolicy="no-referrer" alt="Foto hasil terakhir '+b+'"><div><a href="'+preview+'" target="_blank" rel="noopener">Buka foto asli di tab baru</a></div></div>':'');
       card.querySelector('.media').innerHTML=mediaHtml||'<div class="meta">Belum ada foto/video hasil — media muncul setelah bot menyelesaikan tugas bergambar/video.</div>';
       cardMedia[b]=mediaKey;
     }
+    if(preview||video){ fetchThumb(b, fileName(preview)+'|'+fileName(video)); applyThumb(b); }
     card.querySelector('.meta').innerHTML=isWorking?('Mulai: '+esc(active.ts||'-')+' • berjalan <b class="elapsed" data-ts="'+esc(active.ts||'')+'">'+fmtElapsed(active.ts)+'</b>'):(last?('Terakhir: '+esc(last.ts||'-')):'');
   }
   document.getElementById('nWorking').textContent=working;
