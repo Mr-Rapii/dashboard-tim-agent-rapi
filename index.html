@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Bot Telegram — Tim Agent Rapi</title>
+<style>
+:root{--bg:#0b0e14;--card:#141926;--card2:#1a2033;--line:#262e45;--text:#eef1f8;--muted:#9aa3b8;--green:#2fbf71;--orange:#ff8a3d;--blue:#5b8cff}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(900px 400px at 20% -10%,#1c2a4d 0,transparent 60%),radial-gradient(800px 400px at 90% 0,#3a1c2e 0,transparent 55%),var(--bg);color:var(--text);margin:0;padding:24px 18px 40px}
+.wrap{max-width:1080px;margin:0 auto}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+h1{font-size:28px;line-height:1.15;margin:0}
+h1 span{color:var(--orange)}
+.sub{color:var(--muted);margin:6px 0 0;max-width:640px;line-height:1.5}
+.live{display:inline-flex;align-items:center;gap:8px;background:#12261a;border:1px solid #1f5c38;color:#7be3a8;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+.live.off{background:#2a1a12;border-color:#5c2f1a;color:#f0a878}.live.off i{background:var(--orange);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,191,113,.55)}70%{box-shadow:0 0 0 9px rgba(47,191,113,0)}100%{box-shadow:0 0 0 0 rgba(47,191,113,0)}}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--muted)}
+.stat b{color:var(--text);font-size:18px;display:block}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+button{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.1)}
+#meta{color:var(--muted);font-size:13px}
+#err{color:#ff8a8a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:18px;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.card.working{border-color:#1f5c38;box-shadow:0 0 0 1px #1f5c38 inset}
+.top{display:flex;gap:12px;align-items:center}
+.ava{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden;border:1px solid var(--line)}
+.ava svg{width:56px;height:56px;display:block}
+.card.working .ava{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.typing{display:inline-flex;gap:4px;align-items:center;margin-left:6px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.progress{height:6px;background:#232b42;border-radius:999px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--green),#7be3a8);border-radius:999px;animation:slide 1.4s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-110%)}100%{transform:translateX(280%)}}
+.chatbtn{display:inline-block;margin-top:12px;background:#1f2a44;border:1px solid #33406a;color:#dbe4ff;text-decoration:none;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px}
+.chatbtn:hover{background:#2a3a5e}
+.name{font-size:18px;font-weight:800;margin:0}.role{color:var(--muted);font-size:13px;margin-top:2px}
+.badge{display:inline-block;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:800;margin:12px 0 8px}
+.working .badge{background:var(--green);color:#06281a}
+.idle .badge{background:#2a3248;color:#c3cadb}
+.task{font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.task small{color:var(--muted)}
+.photo{margin-top:12px}
+.photo label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+.photo img{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#0b0e14}
+.meta{color:var(--muted);font-size:12px;margin-top:10px}
+h2{font-size:19px;margin:28px 0 10px}
+.hist{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.6;margin-bottom:8px}
+.hist b{color:#fff}.hist span{color:var(--muted)}
+a{color:#8ab4f8}
+.foot{color:var(--muted);font-size:12px;line-height:1.6;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div>
+<h1>🤖 Dashboard Bot <span>Tim Agent Rapi</span></h1>
+<p class="sub">Siapa lagi kerja, siapa lagi nganggur, tugasnya apa, dan foto hasil terakhirnya — semua live dari data yang sama dengan Mission Control, bukan simulasi.</p>
+</div>
+<span class="live" id="livebadge"><i></i><span id="livetext">Memuat…</span></span>
+</header>
+<div class="stats">
+<div class="stat"><b id="nWorking">–</b>bot sedang bekerja</div>
+<div class="stat"><b id="nIdle">–</b>bot nganggur</div>
+<div class="stat"><b id="nTasks">–</b>total tugas tercatat</div>
+</div>
+<div class="toolbar">
+<button onclick="load(true)">🔄 Perbarui sekarang</button>
+<span id="meta"></span>
+</div>
+<p id="err"></p>
+<div class="grid" id="grid"></div>
+<h2>🕘 Riwayat tugas bot (terbaru dulu)</h2>
+<div id="hist"></div>
+<p class="foot">Sumber data: <a href="https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json">state.json di GitHub</a> (disalin dari dashboard live Vercel tiap 5 menit). Foto hasil terakhir diunggah bot saat tugas bergambar selesai; link foto kedaluwarsa sekitar 2 hari, jadi foto lama kembali jadi nama berkas saja. Foto dan video lengkap tetap dikirim bot langsung ke chat Telegram. Halaman ini refresh otomatis tiap 30 detik; timer "berjalan … detik" dihitung live di browser dari waktu mulai tugas. Data tugasnya sendiri diperbarui tiap 5 menit.</p>
+</div>
+<script>
+const AVATAR_SVG={
+Antogravity:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#ff8a3d"/><rect x="14" y="16" width="36" height="32" rx="9" fill="#fff"/><circle cx="26" cy="30" r="4" fill="#141926"/><circle cx="38" cy="30" r="4" fill="#141926"/><path d="M24 39 Q32 45 40 39" stroke="#141926" stroke-width="2.5" fill="none" stroke-linecap="round"/><line x1="32" y1="16" x2="32" y2="8" stroke="#fff" stroke-width="3"/><circle cx="32" cy="7" r="3.5" fill="#fff"/></svg>',
+Anca:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#5b8cff"/><circle cx="32" cy="24" r="12" fill="#ffe3c2"/><path d="M18 56 Q32 38 46 56 Z" fill="#141926"/><rect x="29" y="44" width="6" height="14" fill="#ff4d6d"/><circle cx="32" cy="24" r="12" fill="none" stroke="#141926" stroke-width="0"/></svg>',
+Mu:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#c86bff"/><ellipse cx="32" cy="16" rx="18" ry="7" fill="#7a2ea0" transform="rotate(-12 32 16)"/><circle cx="32" cy="30" r="12" fill="#ffe3c2"/><circle cx="28" cy="29" r="1.8" fill="#141926"/><circle cx="36" cy="29" r="1.8" fill="#141926"/><line x1="48" y1="44" x2="56" y2="32" stroke="#ffd166" stroke-width="3" stroke-linecap="round"/></svg>',
+Cipu:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#ff4d6d"/><circle cx="32" cy="30" r="13" fill="#ffe3c2"/><path d="M18 32 a14 14 0 0 1 28 0" fill="none" stroke="#141926" stroke-width="4"/><rect x="14" y="28" width="8" height="14" rx="3" fill="#141926"/><rect x="42" y="28" width="8" height="14" rx="3" fill="#141926"/></svg>',
+Jaka:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#2fbf71"/><circle cx="32" cy="32" r="16" fill="#fff"/><circle cx="32" cy="32" r="10" fill="#141926"/><circle cx="32" cy="32" r="4" fill="#5b8cff"/><circle cx="36" cy="28" r="2" fill="#fff"/></svg>',
+Tono:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#f2b705"/><circle cx="28" cy="28" r="13" fill="none" stroke="#141926" stroke-width="4"/><line x1="38" y1="38" x2="50" y2="50" stroke="#141926" stroke-width="5" stroke-linecap="round"/><circle cx="28" cy="28" r="5" fill="#5b8cff"/></svg>',
+Dani:'<svg viewBox="0 0 64 64"><rect width="64" height="64" fill="#9aa3b8"/><rect x="12" y="20" width="40" height="26" rx="4" fill="#141926"/><text x="32" y="38" font-size="13" fill="#7be3a8" text-anchor="middle" font-family="monospace">&lt;/&gt;</text></svg>'};
+const ROLE={Antogravity:'Bot utama — tugas umum, karakter, animasi',Anca:'Project Manager / general',Mu:'Graphic Designer',Cipu:'Video Editor',Jaka:'QC Visual',Tono:'Riset',Dani:'Coding (bot belum dibuat — menunggu BotFather)'};
+const BOTS=['Antogravity','Anca','Mu','Cipu','Jaka','Tono'];
+const CHAT={Antogravity:'AntogravityRapi_Bot',Anca:'AncaRapiBot',Mu:'MuRapiBot',Cipu:'CipuRapiBot',Jaka:'JakaRapiBot',Tono:'TonoRapiBot'};
+let lastData=null;
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function fmtElapsed(ts){
+  const s=new Date(ts).getTime(); if(isNaN(s)) return '';
+  const d=Math.max(0,Math.floor((Date.now()-s)/1000));
+  if(d<60) return d+' detik';
+  if(d<3600) return Math.floor(d/60)+' menit '+ (d%60) +' detik';
+  return Math.floor(d/3600)+' jam '+Math.floor((d%3600)/60)+' menit';
+}
+function render(){
+  const d=lastData; if(!d) return;
+  const badge=document.getElementById('livebadge');
+  badge.className='live'+(d.live_db?'':' off');
+  document.getElementById('livetext').textContent=d.live_db?'● LIVE — data dari Vercel Blob':'○ TIDAK LIVE — fallback memori';
+  document.getElementById('meta').textContent='Diperbarui: '+new Date().toLocaleTimeString('id-ID');
+  let working=0;
+  const grid=document.getElementById('grid'); grid.innerHTML='';
+  for(const b of BOTS){
+    const evs=(d.tasks||[]).filter(t=>t.agent===b || (b==='Antogravity' && t.agent==='AntigravityAgent')).slice().reverse(); // /api/state: terbaru dulu -> balik ke kronologis; alias: event lama bot utama tercatat sebagai AntigravityAgent
+    let active=null;
+    for(let i=evs.length-1;i>=0;i--){ const e=evs[i]; if(e.status==='started'||e.status==='progress'){ const later=evs.slice(i+1).some(x=>x.task_id===e.task_id&&(x.status==='done'||x.status==='failed')); const stale=!isNaN(new Date(e.ts).getTime()) && (Date.now()-new Date(e.ts).getTime()>70*60*1000); if(!later && !stale){active=e;break;} } }
+    const last=evs[evs.length-1];
+    const isWorking=!!active; if(isWorking) working++;
+    let preview='', previewFile='', video='', videoFile='';
+    for(let i=evs.length-1;i>=0;i--){ const det=evs[i].detail||''; const urls=det.match(/https?:\/\/[^\s;|]+/g)||[]; for(const u of urls){ if(/\.(mp4|mov|webm)$/i.test(u) && !video){video=u; videoFile='';} else if(/\.(png|jpg|jpeg|webp|gif)$/i.test(u) && !preview){preview=u;} } if(preview && video) break; }
+    const detParts=(evs[evs.length-1]||{}).detail||'';
+    const card=document.createElement('div'); card.className='card '+(isWorking?'working':'idle');
+    const mediaHtml=(video?'<div class="photo"><label>🎬 Video hasil terakhir</label><video src="'+video+'" controls preload="metadata" style="width:100%;border-radius:12px;border:1px solid var(--line);background:#0b0e14"></video></div>':'')+(preview?'<div class="photo"><label>📸 Foto hasil terakhir</label><img src="'+preview+'" loading="lazy" alt="Foto hasil terakhir '+b+'"></div>':'');
+    card.innerHTML='<div class="top"><div class="ava">'+(AVATAR_SVG[b]||'🤖')+'</div><div><p class="name">'+b+'</p><div class="role">'+esc(ROLE[b]||'')+'</div></div></div>'
+      +'<span class="badge">'+(isWorking?'● SEDANG BEKERJA':'○ IDLE')+'</span>'
+      +(isWorking?'<span class="typing"><i></i><i></i><i></i></span><div class="progress"><i></i></div>':'')
+      +'<div class="task">'+(isWorking?('Tugas: <b>'+esc(active.title||'-')+'</b><br><small>'+esc(active.detail||'')+'</small>'):('Tugas terakhir: '+(last?('<b>'+esc(last.title)+'</b> <small>('+esc(last.status)+')</small>'):'—')))+'</div>'
+      +(mediaHtml||'<div class="meta">Belum ada foto/video hasil — media muncul setelah bot menyelesaikan tugas bergambar/video.</div>')
+      +'<div class="meta">'+(isWorking?('Mulai: '+esc(active.ts||'-')+' • berjalan <b class="elapsed" data-ts="'+esc(active.ts||'')+'">'+fmtElapsed(active.ts)+'</b>'):(last?('Terakhir: '+esc(last.ts||'-')):''))+'</div>'
+      +(CHAT[b]?'<a class="chatbtn" href="https://t.me/'+CHAT[b]+'" target="_blank" rel="noopener">💬 Chat '+b+' di Telegram</a>':'<span class="meta">Bot ini belum dibuat.</span>');
+    grid.appendChild(card);
+  }
+  document.getElementById('nWorking').textContent=working;
+  document.getElementById('nIdle').textContent=BOTS.length-working;
+  document.getElementById('nTasks').textContent=(d.tasks||[]).length;
+  document.getElementById('hist').innerHTML=(d.tasks||[]).slice(0,20).map(t=>'<div class="hist">• <b>'+esc(t.agent)+'</b> — '+esc(t.title)+' <span>('+esc(t.status)+' • '+esc(t.ts||'')+')</span></div>').join('')||'Belum ada riwayat.';
+}
+async function load(manual){
+  try{
+    const r=await fetch('https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json',{cache:'no-store'}); const d=await r.json();
+    lastData=d; document.getElementById('err').textContent=''; render();
+  }catch(e){ document.getElementById('err').textContent='Gagal memuat state.json dari GitHub: '+e.message+' — data diperbarui tiap 5 menit dari dashboard live.'; }
+}
+load(false); setInterval(()=>load(false),30000);
+setInterval(()=>{ document.querySelectorAll('.elapsed').forEach(el=>{ el.textContent=fmtElapsed(el.dataset.ts); }); },1000);
+</script>
+<p class="foot">Repo: <a href="https://github.com/Mr-Rapii/dashboard-tim-agent-rapi">github.com/Mr-Rapii/dashboard-tim-agent-rapi</a> — halaman ini publik, jadi judul tugas dan foto/video hasil bot bisa dilihat siapa pun yang punya linknya.</p>
+</body>
+</html>
