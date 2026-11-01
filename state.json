@@ -355,11 +355,11 @@
       "load5": 0,
       "load15": 0
     },
-    "memory_container_bytes": 114122752,
+    "memory_container_bytes": 115224576,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 232583168,
+    "memory_host_used_bytes": 233361408,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 152.21
+    "uptime_seconds": 215.64
   },
   "vps": {
     "disk": null,
@@ -371,11 +371,11 @@
         "load15": 0
       }
     },
-    "memory_container_bytes": 114122752,
+    "memory_container_bytes": 115224576,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 232583168,
+    "memory_host_used_bytes": 233361408,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 152.21,
+    "uptime_seconds": 215.64,
     "tunnel": {
       "url": "",
       "online": false,
@@ -636,5 +636,5 @@
     "available": false,
     "note": "Perintah status langganan tidak tersedia di lingkungan Vercel — sambungkan perintahnya di server asal."
   },
-  "generated_at": "2026-11-01T10:59:39.365Z"
+  "generated_at": "2026-11-01T11:00:42.794Z"
 }
