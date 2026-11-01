@@ -32,15 +32,7 @@
       "role": "Video Editor",
       "capability": "Editing video, headphone, tema merah REC.",
       "status": "paused",
-      "active_task": {
-        "ts": "2026-11-01T17:58:33+07:00",
-        "task_id": "bot-cipu",
-        "agent": "Cipu",
-        "subagent": null,
-        "title": "oke bagus versi 9:16?",
-        "status": "started",
-        "detail": "Tugas dari chat Telegram (bot Cipu)."
-      },
+      "active_task": null,
       "paused": true
     },
     {
@@ -96,6 +88,33 @@
     }
   ],
   "tasks": [
+    {
+      "ts": "2026-11-01T18:11:48+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "coba buat",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot AntigravityAgent)."
+    },
+    {
+      "ts": "2026-11-01T18:10:59+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "kamu udah install skill bang motion?",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot AntigravityAgent)."
+    },
+    {
+      "ts": "2026-11-01T18:08:38+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "oke bagus versi 9:16?",
+      "status": "done",
+      "detail": "Selesai dalam 606 detik."
+    },
     {
       "ts": "2026-11-01T17:58:33+07:00",
       "task_id": "bot-cipu",
@@ -355,11 +374,11 @@
       "load5": 0,
       "load15": 0
     },
-    "memory_container_bytes": 115224576,
+    "memory_container_bytes": 101240832,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 233361408,
+    "memory_host_used_bytes": 218345472,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 215.64
+    "uptime_seconds": 11.62
   },
   "vps": {
     "disk": null,
@@ -371,11 +390,11 @@
         "load15": 0
       }
     },
-    "memory_container_bytes": 115224576,
+    "memory_container_bytes": 101240832,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 233361408,
+    "memory_host_used_bytes": 218345472,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 215.64,
+    "uptime_seconds": 11.62,
     "tunnel": {
       "url": "",
       "online": false,
@@ -630,11 +649,38 @@
       "title": "oke bagus versi 9:16?",
       "status": "started",
       "detail": "Tugas dari chat Telegram (bot Cipu)."
+    },
+    {
+      "ts": "2026-11-01T18:08:38+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "oke bagus versi 9:16?",
+      "status": "done",
+      "detail": "Selesai dalam 606 detik."
+    },
+    {
+      "ts": "2026-11-01T18:10:59+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "kamu udah install skill bang motion?",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot AntigravityAgent)."
+    },
+    {
+      "ts": "2026-11-01T18:11:48+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "coba buat",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot AntigravityAgent)."
     }
   ],
   "token": {
     "available": false,
     "note": "Perintah status langganan tidak tersedia di lingkungan Vercel — sambungkan perintahnya di server asal."
   },
-  "generated_at": "2026-11-01T11:00:42.794Z"
+  "generated_at": "2026-11-01T11:22:21.983Z"
 }
