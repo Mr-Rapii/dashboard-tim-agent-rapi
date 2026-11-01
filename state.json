@@ -33,11 +33,11 @@
       "capability": "Editing video, headphone, tema merah REC.",
       "status": "paused",
       "active_task": {
-        "ts": "2026-11-01T16:52:30+07:00",
+        "ts": "2026-11-01T17:58:33+07:00",
         "task_id": "bot-cipu",
         "agent": "Cipu",
         "subagent": null,
-        "title": "tes langsung tanpa mention: balas singkat saja, kamu bot apa? jangan buat video dulu",
+        "title": "oke bagus versi 9:16?",
         "status": "started",
         "detail": "Tugas dari chat Telegram (bot Cipu)."
       },
@@ -96,6 +96,51 @@
     }
   ],
   "tasks": [
+    {
+      "ts": "2026-11-01T17:58:33+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "oke bagus versi 9:16?",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot Cipu)."
+    },
+    {
+      "ts": "2026-11-01T17:52:49+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "pakai suara svx dan vo suaranya juga besarkan",
+      "status": "done",
+      "detail": "video: https://muse.ai/files/1406223629241112/1794023298536135/kbhb7hr489kqzv64dx08qmga/cipu-gps.mp4 | cipu-gps.mp4"
+    },
+    {
+      "ts": "2026-11-01T17:52:25+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "hai",
+      "status": "done",
+      "detail": "Selesai dalam 14 detik."
+    },
+    {
+      "ts": "2026-11-01T17:45:06+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "animasi edukasi gaada karakter cuman ngejelasin aja, 1 menit",
+      "status": "done",
+      "detail": "video: https://muse.ai/files/1406223629241112/2383607152467671/1h3ti1rlk3wlxcqzzeuh5gx5/cipu-gps.mp4 | cipu-gps.mp4"
+    },
+    {
+      "ts": "2026-11-01T17:32:44+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "animasi edukasi gaada karakter cuman ngejelasin aja, 1 menit",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot Cipu)."
+    },
     {
       "ts": "2026-11-01T17:27:04+07:00",
       "task_id": "bot-antigravityagent",
@@ -310,11 +355,11 @@
       "load5": 0,
       "load15": 0
     },
-    "memory_container_bytes": 100933632,
+    "memory_container_bytes": 114122752,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 218968064,
+    "memory_host_used_bytes": 232583168,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 10.94
+    "uptime_seconds": 152.21
   },
   "vps": {
     "disk": null,
@@ -326,11 +371,11 @@
         "load15": 0
       }
     },
-    "memory_container_bytes": 100933632,
+    "memory_container_bytes": 114122752,
     "memory_container_processes": 3,
-    "memory_host_used_bytes": 218968064,
+    "memory_host_used_bytes": 232583168,
     "memory_host_total_bytes": 2389237760,
-    "uptime_seconds": 10.94,
+    "uptime_seconds": 152.21,
     "tunnel": {
       "url": "",
       "online": false,
@@ -540,11 +585,56 @@
       "title": "tes",
       "status": "done",
       "detail": "Selesai dalam 12 detik."
+    },
+    {
+      "ts": "2026-11-01T17:32:44+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "animasi edukasi gaada karakter cuman ngejelasin aja, 1 menit",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot Cipu)."
+    },
+    {
+      "ts": "2026-11-01T17:45:06+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "animasi edukasi gaada karakter cuman ngejelasin aja, 1 menit",
+      "status": "done",
+      "detail": "video: https://muse.ai/files/1406223629241112/2383607152467671/1h3ti1rlk3wlxcqzzeuh5gx5/cipu-gps.mp4 | cipu-gps.mp4"
+    },
+    {
+      "ts": "2026-11-01T17:52:25+07:00",
+      "task_id": "bot-antigravityagent",
+      "agent": "Antogravity",
+      "subagent": null,
+      "title": "hai",
+      "status": "done",
+      "detail": "Selesai dalam 14 detik."
+    },
+    {
+      "ts": "2026-11-01T17:52:49+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "pakai suara svx dan vo suaranya juga besarkan",
+      "status": "done",
+      "detail": "video: https://muse.ai/files/1406223629241112/1794023298536135/kbhb7hr489kqzv64dx08qmga/cipu-gps.mp4 | cipu-gps.mp4"
+    },
+    {
+      "ts": "2026-11-01T17:58:33+07:00",
+      "task_id": "bot-cipu",
+      "agent": "Cipu",
+      "subagent": null,
+      "title": "oke bagus versi 9:16?",
+      "status": "started",
+      "detail": "Tugas dari chat Telegram (bot Cipu)."
     }
   ],
   "token": {
     "available": false,
     "note": "Perintah status langganan tidak tersedia di lingkungan Vercel — sambungkan perintahnya di server asal."
   },
-  "generated_at": "2026-11-01T10:32:32.611Z"
+  "generated_at": "2026-11-01T10:59:39.365Z"
 }
