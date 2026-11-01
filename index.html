@@ -82,7 +82,7 @@ a{color:#8ab4f8}
 <div class="grid" id="grid"></div>
 <h2>🕘 Riwayat tugas bot (terbaru dulu)</h2>
 <div id="hist"></div>
-<p class="foot">Sumber data: <a href="https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json">state.json di GitHub</a> (disalin dari dashboard live Vercel tiap 5 menit). Foto hasil terakhir diunggah bot saat tugas bergambar selesai; link foto kedaluwarsa sekitar 2 hari, jadi foto lama kembali jadi nama berkas saja. Foto dan video lengkap tetap dikirim bot langsung ke chat Telegram. Halaman ini refresh otomatis tiap 30 detik; timer "berjalan … detik" dihitung live di browser dari waktu mulai tugas. Data tugasnya sendiri diperbarui tiap 5 menit.</p>
+<p class="foot">Sumber data: <a href="https://raw.githubusercontent.com/Mr-Rapii/dashboard-tim-agent-rapi/main/state.json">state.json di GitHub</a> (disalin dari dashboard live Vercel tiap 5 menit). Foto hasil terakhir diunggah bot saat tugas bergambar selesai; link foto kedaluwarsa sekitar 2 hari, jadi foto lama kembali jadi nama berkas saja. Foto dan video lengkap tetap dikirim bot langsung ke chat Telegram. Halaman ini refresh otomatis tiap 5 detik; timer "berjalan … detik" dihitung live di browser dari waktu mulai tugas. Data tugasnya sendiri diperbarui tiap 5 menit.</p>
 </div>
 <script>
 const AVATAR_SVG={
@@ -144,7 +144,7 @@ async function load(manual){
     lastData=d; document.getElementById('err').textContent=''; render();
   }catch(e){ document.getElementById('err').textContent='Gagal memuat state.json dari GitHub: '+e.message+' — data diperbarui tiap 5 menit dari dashboard live.'; }
 }
-load(false); setInterval(()=>load(false),30000);
+load(false); setInterval(()=>load(false),5000);
 setInterval(()=>{ document.querySelectorAll('.elapsed').forEach(el=>{ el.textContent=fmtElapsed(el.dataset.ts); }); },1000);
 </script>
 <p class="foot">Repo: <a href="https://github.com/Mr-Rapii/dashboard-tim-agent-rapi">github.com/Mr-Rapii/dashboard-tim-agent-rapi</a> — halaman ini publik, jadi judul tugas dan foto/video hasil bot bisa dilihat siapa pun yang punya linknya.</p>
